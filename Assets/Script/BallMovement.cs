@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
@@ -46,7 +42,7 @@ public class BallMovement : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             // rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            StartCoroutine(Jump(0.2f));
+            StartCoroutine(Jump(0.2f, jumpForce));
         }
     }
 
@@ -58,7 +54,7 @@ public class BallMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Jump(float duration)
+    public IEnumerator Jump(float duration, float force)
     {
         Vector3 target = new Vector3(initialScale.x, initialScale.y * squashFactor, initialScale.z);
 
@@ -69,6 +65,6 @@ public class BallMovement : MonoBehaviour
         transform.localScale = initialScale;
 
         
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, force);
     }
 }
